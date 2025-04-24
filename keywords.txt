@@ -1,0 +1,38 @@
+setupAP	KEYWORD2
+startWebServer	KEYWORD2
+handleWebServer	KEYWORD2
+RTC_webVariableProcessor	KEYWORD2
+setRTC_DateTime	KEYWORD2
+setRTC_TZstr	KEYWORD2
+resetRTC_TZ	KEYWORD2
+posixTZDataFromStr	KEYWORD2
+buildPOSIXdescription	KEYWORD2
+cleanUpPosixTZStr	KEYWORD2
+initTZsupport	KEYWORD2
+getTZstr	KEYWORD2
+resetDefaultTZstr	KEYWORD2
+printTimeZoneConfig	KEYWORD2
+setTZfromPOSIXstr	KEYWORD2
+saveTZconfigIfNeeded	KEYWORD2
+initRTC	KEYWORD2
+syncFromRTC	KEYWORD2
+isRTCDateTimeSet	KEYWORD2
+initNTP	KEYWORD2
+handleNTP	KEYWORD2
+print_tm	KEYWORD2
+get_ddMMYYYY	KEYWORD2
+getHHMMss	KEYWORD2
+getHHMM	KEYWORD2
+get_yyyymmdd	KEYWORD2
+initializeFS	KEYWORD2
+showLittleFS_size	KEYWORD2
+listDir	KEYWORD2
+getDebugOut	KEYWORD2
+setDebugOut	KEYWORD2
+	
+
+
+
+	
+
+
