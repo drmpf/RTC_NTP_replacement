@@ -1,0 +1,114 @@
+<head>
+  <meta http-equiv="refresh" content="600"/>
+  <title>Set RTC Time</title>
+  <meta http-equiv="refresh" content="60"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+  <h2>Current Local RTC Time<br>
+     <div id="clock">00:00:00</div>
+     <div class="current-date"><script>document.write(PLACEHOLDER_CUR_DATE);</script></div>
+  </h2>
+  <div class="content">
+        <div><script>document.write(PLACEHOLDER_RESET_DATE_TIME ? "Reset Date and Time after changing Time Zone" : "");</script></div>
+        <div>Input Current Local Date and Time<br>Changes of less then 5 mins smoothly synchronize the System Clock.</div>
+          <form action="/setRTCDateTime" method="post">
+             <div class="date-time">
+               <div class="time">
+                  <label>Local Date</label>
+                  <div class="date-field">
+                      <input type="date" id="DATE" name="DATE" value="" min="2000-01-01" max="9999-12-31" required>
+                      <script>document.getElementById('DATE').value = PLACEHOLDER_DATE;</script>
+                  </div>
+               </div>
+               <br>
+               <div class="time">
+                   <label>Local Time</label>
+                   <div class="time-field">
+                       <input type="time" id="TIME" name="TIME" value="" min="00:00" max="23:59" required>
+                       <script>document.getElementById('TIME').value = PLACEHOLDER_TIME;</script>
+                   </div>
+               </div>
+               <br>
+               <div>
+                  <button type="submit" class="buttonLong">Set RTC Date and Time</button> <br>
+               </div>
+             </div>
+          </form>
+
+          <h2>
+          <label for="fname">POSIX Time Zone</label><br>
+          <div class="fname" id="tz_str">
+               <script>document.write(PLACEHOLDER_TZ_STR);</script>
+          </div>
+          <div class="RTC-info-txt">(Note: POSIX TZ uses the -ve of the GMT offset)</div>
+           </h2>                   
+              <a href="/settzRTC.html"><button class="buttonLong">Set Time Zone</button></a> 
+              <p></p>              
+              <a href="/index.html"><button class="buttonLong">Home</button></a>
+  </div>
+
+ <script>
+ // refresh on window gaining focus to update to current correct time.
+ // while focused will reload every 10mins (meta http-equiv="refresh" content="600") to keep this second counter below accurate
+ window.onblur= function() {window.onfocus= function () {location.reload(true)}};
+function updateTime(k) {
+    "use strict";
+    // appending 0 before time elements if less than 10 
+    if (k < 10) {
+        return "0" + k;
+    }
+    return k;
+}
+
+function displayTime(time_sec) {
+    "use strict";
+    var c = time_sec;
+    var hour = Math.floor(c / (60 * 60));
+    var rem = (c - (hour * (60 * 60)));
+    var min = Math.floor(rem / 60);
+    var sec = rem - min * 60;
+    if (hour > 23) {
+        hour = hour % 24;
+    }
+    var midday = "AM";
+    midday = (hour >= 12) ? "PM" : "AM";
+    hour = (hour === 0) ? 12 : ((hour > 12) ? (hour - 12) : hour);
+    hour = updateTime(hour);
+    min = updateTime(min);
+    return (hour + " : " + min + " " + midday);
+}
+
+let c = PLACEHOLDER_TIME_CURRENT_S - 1; 
+//let c = 100000000; 
+
+function currentTime() {
+    c = c + 1;
+    var hour = Math.floor(c / (60 * 60));
+    var rem = (c - (hour * (60 * 60)));
+    var min = Math.floor(rem / 60);
+    var sec = rem - min * 60;
+    if (hour > 23) {
+        hour = hour % 24;
+    }
+    var midday = "AM";
+    midday = (hour >= 12) ? "PM" : "AM"; // assigning AM/PM 
+    hour = (hour === 0) ? 12 : ((hour > 12) ? (hour - 12) : hour); // assigning hour in 12-hour format 
+    hour = updateTime(hour);
+    min = updateTime(min);
+    sec = updateTime(sec);
+    if (PLACEHOLDER_HAVE_RTC) {
+      document.getElementById("clock").innerText = hour + " : " + min + " : " + sec + " " + midday; // adding time to the div
+    } else {
+      document.getElementById("clock").innerText = "waiting for RTC time to be set";
+    }
+    var t = setTimeout(currentTime, 1000); // setting timer 
+}
+currentTime();
+</script>
+  
+</body>
+</html>

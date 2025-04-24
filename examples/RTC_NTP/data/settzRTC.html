@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<script>
+    // Placeholder variables - will be replaced by server
+    const PLACEHOLDER_TZ_CORRECTED = "%TZ_CORRECTED%";
+    const PLACEHOLDER_TZ_STR = "%TZ_STR%";
+    const PLACEHOLDER_TZ_DESC_STR = "%TZ_DESC_STR%";
+    const PLACEHOLDER_TZ_STR_SET_CORRECTED = "%TZ_STR_SET_CORRECTED%";
+</script>
+
+  <style>
+    .arrowpopup {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .arrowpopup .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #0000ff;
+      color: white;
+      font-size: 12px;
+      text-align: center;
+      border-radius: 4px;
+      padding: 9px;
+      position: absolute;
+      top: 100%%;
+      left: 75%%;
+      margin-left: -240px;
+      margin-top: 5px;
+    }
+    .arrowpopup .tooltiptext::after {
+      content: "";
+      position: absolute;
+      bottom: 100%%;
+      left: 75%%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent #0000ff transparent;
+    }
+    .arrowpopup .show {
+      visibility: visible;
+    }
+  </style>
+  <script>
+    function myFunction() {
+      var tt = document.getElementById("tooltipdemo");
+      tt.classList.toggle("show");
+    }
+  </script>
+
+  <head>
+    <title>Time Zone Setter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+
+    <h2>Set Time Zone</h2>
+    <div class="content">
+      <div class="card-grid">
+        <div class="card">
+          <div class="time">
+            <form action="/setTZstr">
+              <label for="fname">POSIX Time Zone</label><br>
+              <div class="info-txt">(Note: POSIX TZ uses the -ve of the GMT offset)</div>
+              <div class="info-txt" id="tz_str_corrected">
+                <script>document.write(PLACEHOLDER_TZ_CORRECTED);</script>
+              </div>
+  
+              <div class="tzstr-field">   
+                <input type="text" id="TZ_INPUT_STR" name="TZ_INPUT_STR" style="width: 250px;" value="">
+                <script>document.getElementById('TZ_INPUT_STR').value = PLACEHOLDER_TZ_STR;</script>
+              </div>
+              <div class="arrowpopup" onclick="myFunction()" style="font-size: 15px;"><b>&lt;Click here for Format Help&gt;</b>
+                <span class="tooltiptext" id="tooltipdemo">TZ/DST Format Help<br><br>-GMT hr:mm<br>e.g. for GMT+0530 enter -5:30<br>
+                or<br> -GMT hr:mm , dstStart , dstStop i.e.<br>-GMT hr:mm , mm.wk.dy/hr , mm.wk.dy/hr<br>periods (.) between mm wk dy<br>
+                mm is 1 to 12<br>wk is 1 to 5(lastweek)<br>
+                dy is 0 (Sun) to 6<br><br>e.g. 8,10.1.0/2<br>
+                cleans up to<br>&lt;-08&gt;8&lt;-07&gt;7,M10.1.0/2,M4.1.0/2</span>
+              </div>
+              <div class="info-txt" id="tz_str_desc">
+                <script>document.write(PLACEHOLDER_TZ_DESC_STR);</script>
+              </div>
+              <button type="submit" class="button">Set TZ Format</button>
+            </form> 
+            <div class="info-txt" id="tz_str_set_corrected">
+              <script>document.write(PLACEHOLDER_TZ_STR_SET_CORRECTED);</script>
+            </div>
+            <br>
+            <a href="/resetTZ"><button class="buttonLong" style="font-size: 15px;">Reset Default Time Zone</button></a> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<script>
+    // Placeholder variables - will be replaced by server
+        const PLACEHOLDER_CUR_DATE = "%CUR_DATE%";
+        const PLACEHOLDER_TIME_CURRENT_S = %TIME_CURRENT_S%;
+        const PLACEHOLDER_HAVE_RTC = %HAVE_RTC%;
+</script>
+
+<head>
+    <title>RTC with TimeZone</title>
+    <meta http-equiv="refresh" content="60"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <h2>RTC with TimeZone</h2>
+    <h2>Current Local RTC Date and Time<br>
+        <div class="current-date">
+            <script>
+                document.write(PLACEHOLDER_CUR_DATE);
+            </script>
+        </div>
+        <div id="clock">00:00:00</div>
+    </h2>
+
+    <div>
+        <a href="/setRTCtime.html"><button class="buttonLong" >Set Time</button></a>
+    </div>
+
+    <script>
+        // refresh on window gaining focus to update to current correct time.
+         // while focused will reload every 10mins (meta http-equiv="refresh" content="600") to keep this second counter below accurate
+         window.onblur= function() {window.onfocus= function () {location.reload(true)}};
+        function updateTime(k) {
+            "use strict";
+            // appending 0 before time elements if less than 10 
+            if (k < 10) {
+                return "0" + k;
+            }
+            return k;
+        }
+        
+        function displayTime(time_sec) {
+            "use strict";
+            var c = time_sec;
+            var hour = Math.floor(c / (60 * 60));
+            var rem = (c - (hour * (60 * 60)));
+            var min = Math.floor(rem / 60);
+            var sec = rem - min * 60;
+            if (hour > 23) {
+                hour = hour %% 24;
+            }
+            var midday = "AM";
+            midday = (hour >= 12) ? "PM" : "AM";
+            hour = (hour === 0) ? 12 : ((hour > 12) ? (hour - 12) : hour);
+            hour = updateTime(hour);
+            min = updateTime(min);
+            return (hour + " : " + min + " " + midday);
+        }
+        
+        let c = PLACEHOLDER_TIME_CURRENT_S - 1; 
+        //let c = 100000000; 
+        
+        function currentTime() {
+            c = c + 1;
+            var hour = Math.floor(c / (60 * 60));
+            var rem = (c - (hour * (60 * 60)));
+            var min = Math.floor(rem / 60);
+            var sec = rem - min * 60;
+            if (hour > 23) {
+                hour = hour %% 24;
+            }
+            var midday = "AM";
+            midday = (hour >= 12) ? "PM" : "AM"; // assigning AM/PM 
+            hour = (hour === 0) ? 12 : ((hour > 12) ? (hour - 12) : hour); // assigning hour in 12-hour format 
+            hour = updateTime(hour);
+            min = updateTime(min);
+            sec = updateTime(sec);
+            if (PLACEHOLDER_HAVE_RTC) {
+              document.getElementById("clock").innerText = hour + " : " + min + " : " + sec + " " + midday; // adding time to the div
+            } else {
+              document.getElementById("clock").innerText = "RTC Date/Time not set yet.";
+            }
+            var t = setTimeout(currentTime, 1000); // setting timer 
+        }
+        currentTime();
+    </script>
+
+</body>
+
+</html>
