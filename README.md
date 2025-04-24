@@ -23,5 +23,5 @@ See [RTC_NTP_replacement Tutorial](https://www.forward.com.au/pfod/ArduinoProgra
 
 
 # Revisions
-V1.1.0 initial release    
+V1.0.0 initial release    
 
