@@ -1,5 +1,6 @@
 /**
   RTC_TZ.ino
+    Compiled on ESP32 with V3.0.7
  * (c)2025 Forward Computing and Control Pty. Ltd.
  * NSW Australia, www.forward.com.au
  * This code is not warranted to be fit for any purpose. You may only use it at your own risk.

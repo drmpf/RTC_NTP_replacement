@@ -1,9 +1,9 @@
-#ifndef _WEBPAGES_H
-#define _WEBPAGES_H
+#ifndef _RTC_WEBPAGES_H
+#define _RTC_WEBPAGES_H
 
 #include <Arduino.h>
 /*   
-   webpages.h
+   RTC_webpages.h
  * (c)2025 Forward Computing and Control Pty. Ltd.
  * NSW Australia, www.forward.com.au
  * This code is not warranted to be fit for any purpose. You may only use it at your own risk.
