@@ -72,7 +72,7 @@ bool initNTP() {
     debugPtr->println("Setting up NTP time");
   }
   // just for testing get NTP every 1 min (60000ms)
-  sntp_set_sync_interval(60000);
+  sntp_set_sync_interval(60ul*60000); // once per hr
   configTime(0, 0, "pool.ntp.org");
   return true;
 }
