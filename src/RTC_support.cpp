@@ -265,7 +265,7 @@ void syncFromRTC() {
       settimeofday(&sync_tv, NULL); // within 1 to 2 sec just set now adjust for interrupt delay
     } else { // > 2 sec offset // push forward 2sec at second so 10min in 5mins
       if (debugPtr) {
-        debugPtr->println("More than -2 sec");
+        debugPtr->println("Behind by more than -2 sec");
       }
       struct timeval sync_tv;
       sync_tv.tv_sec = tv.tv_sec + 2; // push it 2 sec
@@ -282,7 +282,7 @@ void syncFromRTC() {
   }
   // timeofday is ahead, need to stop it
   if (debugPtr) {
-    debugPtr->print(" Head by "); debugPtr->print(ms_Diff); debugPtr->println(" ms");
+    debugPtr->print(" Ahead by "); debugPtr->print(ms_Diff); debugPtr->println(" ms");
   }
   struct timeval sync_tv;
   sync_tv.tv_sec = currentSec;

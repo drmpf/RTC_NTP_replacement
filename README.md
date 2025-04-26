@@ -23,6 +23,7 @@ See [RTC_NTP_replacement Tutorial](https://www.forward.com.au/pfod/ArduinoProgra
 
 
 # Revisions
+V1.0.4 intial NTP request is compensated for delays in setup()    
 V1.0.3 increased NTP request interval to 1h (was 1min)    
 V1.0.2 renamed webpages.cpp/.h to RTC_webpages.cpp/.h    
 V1.0.0 initial release    
